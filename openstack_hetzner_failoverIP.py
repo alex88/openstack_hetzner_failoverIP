@@ -85,8 +85,8 @@ def initList(callHetznerApi = False):
 			hetznerList[failoverIP] = association['hetzner_host']
 	floatingList = getNovaFloatingList()
 	for failoverIP, hetzner_host in hetznerList.iteritems():
-		ipList[failoverIP] = { 'hetzner_host': hetzner_host, 'nova_host': floatingList[failoverIP] if floatingList[failoverIP] is not None else None }
-		if verbose: print "Failover Ip %s is routed to %s and associated in nova to %s" % (failoverIP,hetzner_host,floatingList[failoverIP])
+		ipList[failoverIP] = { 'hetzner_host': hetzner_host, 'nova_host': floatingList[failoverIP] if floatingList.has_key(failoverIP) and floatingList[failoverIP] is not None else None }
+		if verbose: print "Failover Ip %s is routed to %s and associated in nova to %s" % (failoverIP,hetzner_host,floatingList[failoverIP] if floatingList.has_key(failoverIP) and floatingList[failoverIP] is not None else None)
 
 def checkForChanges():
 	if verbose: print "Checking for routing mismatch"
