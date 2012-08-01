@@ -63,7 +63,7 @@ def getNovaFloatingList():
 	if verbose: print "Getting nova floating ip list"
 	db = MySQLdb.connect(mysql_host,mysql_user,mysql_pass,mysql_db,cursorclass=MySQLdb.cursors.DictCursor)
 	c = db.cursor()
-	c.execute("SELECT * FROM floating_ips")
+	c.execute("SELECT * FROM floating_ips WHERE deleted = 0")
 	rawdata = c.fetchall()
 	floatingList = {}
 	for row in rawdata:
